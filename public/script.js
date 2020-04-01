@@ -26,6 +26,8 @@ let player = '' // " " player use
 let playerScore = 0 // player score
 let botScore = 0 // bot score
 
+let isLoading = false // sets true or false if loading or not
+
 // starts the game
 start()
 
@@ -46,34 +48,45 @@ function start() {
 }
 
 function attackHandler(e) { // handler function for incoming click events.
-  let idx = -1
-  let botAttackIdx = Math.floor(Math.random() * 3) // sets the index for bot weapon
+  if (!isLoading) { // will only run if it is not loading to avoid multiple stack of events
+    let idx = -1
+    let botAttackIdx = Math.floor(Math.random() * 3) // sets the index for bot weapon
 
-  switch (e.target.id) { // sets the index for player weapon
-    case 'rock':
-      idx = 0
-      break
-    case 'paper':
-      idx = 1
-      break
-    case 'scissors':
-      idx = 2
-      break
-    default:
-      break
+    switch (e.target.id) { // sets the index for player weapon
+      case 'rock':
+        idx = 0
+        break
+      case 'paper':
+        idx = 1
+        break
+      case 'scissors':
+        idx = 2
+        break
+      default:
+        break
+    }
+
+    player = getAttack(idx, 1) // sets the value for the player
+    initiateLoading(botAttackIdx) // loads the bot attack
   }
+}
 
-  player = getAttack(idx, 1) // sets the value for the player
-  initiateLoading(botAttackIdx) // loads the bot attack
+function loadingSwitcher() { // switches isLoading
+  isLoading = !isLoading
 }
 
 function initiateLoading(botAttackIdx) { // loads the bot attack
   setTimeout(() => {
+    loadingSwitcher() // sets isLoading to false
+
     bot = getAttack(botAttackIdx, 0)
     loading.innerText = ""
     addScore(didWin()) // add score to bot or player when either wins
     whoWins() // declares who wins according to the maximum score
   }, loadingTime)
+
+  loadingSwitcher() // sets isLoading to true
+
   loading.innerText = loadingMessage
   enemyWeapon.src = ""
 }
