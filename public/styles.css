@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.weapons {
+  display: flex;
+  justify-content: center;
+}
+
+.holder {
+  margin: 5px;
+  padding: 15px;
+}
+
+.holder img {
+  width: 60px;
+  height: 60px;
+}
+
+.holder img:active {
+  width: 63px;
+  height: 63px;
+} 
+
+
+.player-weapon {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.enemy-weapon {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}
