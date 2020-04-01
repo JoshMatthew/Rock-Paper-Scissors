@@ -4,6 +4,8 @@ const rock = document.getElementById('rock')
 const paper = document.getElementById('paper')
 const scissors = document.getElementById('scissors')
 const loading = document.getElementById('loading')
+const scoreBot = document.getElementById('bot')
+const scorePlayer = document.getElementById('player')
 
 // sources for the images
 const attacks = [
@@ -11,6 +13,9 @@ const attacks = [
   './images/icons8-paper-100.png', // paper
   './images/icons8-hand-scissors-100.png' // scissors
 ]
+
+// sets class for h1 with id loading to center it
+loading.classList.add('select-weapon')
 
 const loadingTime = 2000; // 2 seconds
 const loadingMessage = 'Loading...' // the loading message
@@ -67,7 +72,6 @@ function initiateLoading(botAttackIdx) { // loads the bot attack
     bot = getAttack(botAttackIdx, 0)
     loading.innerText = ""
     addScore(didWin()) // add score to bot or player when either wins
-    console.log(playerScore, botScore)
     whoWins() // declares who wins according to the maximum score
   }, loadingTime)
   loading.innerText = loadingMessage
@@ -87,6 +91,8 @@ function addScore(didWIn) { // adds score to either bot or player
   if (didWIn !== null) { // null means draw
     didWIn ? playerScore++ : botScore++
   }
+  scoreBot.innerText = `Bot: ${botScore}`
+  scorePlayer.innerText = `Player: ${playerScore}`
 }
 
 function whoWins() { // checks who wins

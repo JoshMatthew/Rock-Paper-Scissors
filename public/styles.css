@@ -43,6 +43,11 @@
   justify-content: center;
 }
 
-h1 {
+.select-weapon {
   text-align: center;
+}
+
+.score {
+  float: left;
+  padding: 15px;
 }
